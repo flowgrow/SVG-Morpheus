@@ -2,10 +2,10 @@
  * SVG Morpheus v0.3.2
  * https://github.com/alexk111/SVG-Morpheus
  *
- * Copyright (c) 2016 Alex Kaul
+ * Copyright (c) 2017 Alex Kaul
  * License: MIT
  *
- * Generated at Saturday, May 14th, 2016, 5:19:19 PM
+ * Generated at Sunday, October 22nd, 2017, 11:59:12 PM
  */
 (function() {
 'use strict';
@@ -1208,6 +1208,21 @@ SVGMorpheus.prototype._init=function(){
                 }
               }
 
+              // Traverse all computed styles and get supported values
+              var cs = getComputedStyle(nodeItem, null);
+              for (var l = 0, len4=cs.length; l < len4; l++) {
+                var styleName = cs[l];
+                switch (styleName) {
+                  case 'fill':
+                  case 'fill-opacity':
+                  case 'opacity':
+                  case 'stroke':
+                  case 'stroke-opacity':
+                  case 'stroke-width':
+                    item.style[styleName]=cs[styleName];
+                }
+              }
+
               items.push(item);
             }
           }
@@ -1475,5 +1490,4 @@ if (typeof define === 'function' && define.amd) {
 } else {
   window.SVGMorpheus = SVGMorpheus
 }
-
 }());

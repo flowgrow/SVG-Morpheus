@@ -187,6 +187,21 @@ SVGMorpheus.prototype._init=function(){
                 }
               }
 
+              // Traverse all computed styles and get supported values
+              var cs = getComputedStyle(nodeItem, null);
+              for (var l = 0, len4=cs.length; l < len4; l++) {
+                var styleName = cs[l];
+                switch (styleName) {
+                  case 'fill':
+                  case 'fill-opacity':
+                  case 'opacity':
+                  case 'stroke':
+                  case 'stroke-opacity':
+                  case 'stroke-width':
+                    item.style[styleName]=cs[styleName];
+                }
+              }
+
               items.push(item);
             }
           }
